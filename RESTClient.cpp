@@ -105,7 +105,6 @@ int RESTClient::httpGET(const char *host, const char *endpoint, String headers, 
   {
     _client->print(request);
 
-    delay(200);
     do
     {
       if (_client->connected())
