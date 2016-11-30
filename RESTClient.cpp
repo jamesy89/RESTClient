@@ -62,7 +62,7 @@ int RESTClient::httpPOST(const char *host, const char *endpoint, String headers,
         response += chunk;
       }
       limit++;
-    } while (chunk.length() > 0 && limit < 100);
+    } while ((response.length() == 0) || chunk.length() > 0 && limit < 100);
   }
   else
   {
@@ -74,7 +74,7 @@ int RESTClient::httpPOST(const char *host, const char *endpoint, String headers,
   if (response.length() > 12)
   {
     String responseCode = getHttpCode(response);
-    resp = response.substring(response.indexOf('{'), response.indexOf('}') + 1);
+    resp = response.substring(response.indexOf('{'), response.lastIndexOf('}') + 1);
 
     return responseCode.toInt();
   }
